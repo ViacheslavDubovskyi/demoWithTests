@@ -36,6 +36,33 @@
             <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/ma.glasnost.orika/orika-core -->
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.rakugakibox.spring.boot</groupId>
+            <artifactId>orika-spring-boot-starter</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
         <!-- Junit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
