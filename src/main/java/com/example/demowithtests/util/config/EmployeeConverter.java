@@ -4,9 +4,6 @@ import com.example.demowithtests.domain.Employee;
 import com.example.demowithtests.dto.*;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -48,6 +45,10 @@ public class EmployeeConverter {
 
     public EmployeeDeleteDto employeeDeleteDto (Employee entity){
         return mapperFacade.map(entity, EmployeeDeleteDto.class);
+    }
+
+    public EmployeeUpdatePhoneNumber employeeUpdatePhoneNumber (Employee entity){
+        return mapperFacade.map(entity, EmployeeUpdatePhoneNumber.class);
     }
 
     public Employee fromDto(EmployeeDto dto) {

@@ -25,4 +25,6 @@ public interface Service {
     List<Employee> findRecordsWhereEmailNull();
 
     List<Employee> findEmployeesByCountry(String country);
+
+    Employee updatePhoneById (Integer id, Integer phoneNumber);
 }

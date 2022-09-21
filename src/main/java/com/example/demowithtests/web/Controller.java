@@ -98,6 +98,15 @@ public class Controller {
         return dto;
     }
 
+    @PatchMapping("/users/{id}/update_phone_number")
+    @ResponseStatus(HttpStatus.OK)
+    public EmployeeUpdatePhoneNumber refreshDtoPhoneNumber(@PathVariable("id") Integer id,
+                                                           @RequestParam(value = "phoneNumber") Integer phoneNumber) {
+        var employee =  service.updatePhoneById(id, phoneNumber);
+        var dto = converter.employeeUpdatePhoneNumber(employee);
+        return dto;
+    }
+
     @PatchMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeEmployeeById(@PathVariable Integer id) {
