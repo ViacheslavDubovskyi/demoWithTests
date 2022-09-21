@@ -5,10 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.Instant;
-import java.util.Date;
 
-public class EmployeeReadDto {
+public class EmployeeReadByCountryDto {
 
     @NotNull(message = "Name may not be null")
     @Size(min = 2, max = 32, message = "Name must be between 2 and 32 characters long")
@@ -21,8 +19,5 @@ public class EmployeeReadDto {
     @NotNull
     public String email;
 
-    @Schema(description = "Phone number of the employee", example = "123456789", required = true)
     public Integer phoneNumber;
-
-    public Date date = Date.from(Instant.now());
 }

@@ -1,8 +1,7 @@
 package com.example.demowithtests.web;
 
 import com.example.demowithtests.domain.Employee;
-import com.example.demowithtests.dto.EmployeeDto;
-import com.example.demowithtests.dto.EmployeeReadDto;
+import com.example.demowithtests.dto.*;
 import com.example.demowithtests.service.Service;
 import com.example.demowithtests.util.config.EmployeeConverter;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,11 +41,31 @@ public class Controller {
         return dto;
     }
 
-    @GetMapping("/users")
+    @PostMapping("/users/save_date")
+    @ResponseStatus(HttpStatus.CREATED)
+    public EmployeeDtoWithDate saveEmployee(@RequestBody @Valid EmployeeDtoWithDate requestForSave) {
+
+        var employee = converter.getMapperFacade().map(requestForSave, Employee.class);
+        var dto = converter.employeeDtoWithDate(service.create(employee));
+
+        return dto;
+    }
+
+    @GetMapping("/users/tech")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EmployeeReadTechDto> getAllUsersTech() {
+        var employeeList = service.getAll();
+        var dto = converter.employeeReadTechDto(employeeList);
+        return dto;
+    }
+
+    @GetMapping("/users/")
     @ResponseStatus(HttpStatus.OK)
     public List<Employee> getAllUsers() {
+
         return service.getAll();
     }
+
     //Получения юзера по id
     @GetMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -71,9 +90,24 @@ public class Controller {
         return service.updateById(id, employee);
     }
 
+    @PutMapping("/users/{id}/update_dto")
+    @ResponseStatus(HttpStatus.OK)
+    public EmployeeUpdateDto refreshEmployeeDto(@PathVariable("id") Integer id, @RequestBody Employee employee) {
+        var user =  service.updateById(id, employee);
+        var dto = converter.employeeUpdateDto(employee);
+        return dto;
+    }
+
     @PatchMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeEmployeeById(@PathVariable Integer id) {
+        service.removeById(id);
+    }
+
+    @PatchMapping("/users/{id}/delete_dto")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeByIdDto (@PathVariable Integer id) {
+        var dto = converter.employeeDeleteDto(service.getById(id));
         service.removeById(id);
     }
 
@@ -105,5 +139,13 @@ public class Controller {
     @ResponseStatus(HttpStatus.OK)
     public List<Employee> getUsersByCountry(@RequestParam(value = "country") String country) {
         return service.findEmployeesByCountry(country);
+    }
+
+    @GetMapping(value = "/users/country_dto", params = {"country"})
+    @ResponseStatus(HttpStatus.OK)
+    public List<EmployeeReadByCountryDto> getUsersByCountryDto(@RequestParam(value = "country") String country) {
+        var employeeList = service.findEmployeesByCountry(country);
+        var dto = converter.employeeReadByCountryDto(employeeList);
+        return dto;
     }
 }

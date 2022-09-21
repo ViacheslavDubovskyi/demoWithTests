@@ -22,4 +22,7 @@ public class EmployeeDto {
     @NotNull
     @Schema(description = "Email address of an employee.", example = "billys@mail.com", required = true)
     public String email;
+
+    @Schema(description = "Phone number of the employee", example = "123456789", required = true)
+    public Integer phoneNumber;
 }

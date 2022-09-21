@@ -8,21 +8,24 @@ import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.Date;
 
-public class EmployeeReadDto {
+public class EmployeeDtoWithDate {
 
     @NotNull(message = "Name may not be null")
     @Size(min = 2, max = 32, message = "Name must be between 2 and 32 characters long")
     @Schema(description = "Name of an employee.", example = "Billy", required = true)
     public String name;
 
+    @Schema(description = "Name of the country.", example = "England", required = true)
     public String country;
 
     @Email
     @NotNull
+    @Schema(description = "Email address of an employee.", example = "billys@mail.com", required = true)
     public String email;
 
     @Schema(description = "Phone number of the employee", example = "123456789", required = true)
     public Integer phoneNumber;
 
     public Date date = Date.from(Instant.now());
+
 }
