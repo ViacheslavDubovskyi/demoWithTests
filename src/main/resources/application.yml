@@ -20,6 +20,10 @@ spring:
     enabled: true
     # clean-disabled: true
     baseline-on-migrate: true
+    #  security:
+    #    user:
+    #      name: admin
+    #      password: admin
 # Server configuration
 server:
   port: 8087 #set your port
