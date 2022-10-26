@@ -2,8 +2,8 @@ package com.example.demowithtests;
 
 import com.example.demowithtests.domain.Employee;
 import com.example.demowithtests.repository.Repository;
-import com.example.demowithtests.service.ServiceBean;
-import com.example.demowithtests.util.ResourceNotFoundException;
+import com.example.demowithtests.service.Impl.ServiceBean;
+import com.example.demowithtests.util.exception.ResourceNotFoundException;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -92,7 +91,7 @@ public class ServiceTests {
     @Test
     @DisplayName("List of Employee with field 'phone number' should be returned")
     public void IfPhoneNumberExists_shouldReturnListEmployee() {
-        Integer phoneNumber = 12345678;
+        Long phoneNumber = 12345678L;
         Employee created = new Employee();
         created.setPhoneNumber(phoneNumber);
 
@@ -160,5 +159,25 @@ public class ServiceTests {
 
         given(repository.findById(anyInt())).willReturn(Optional.empty());
         service.getById(id);
+    }
+
+    @Test
+    @DisplayName("Update phone number of employee with certain id")
+    public void update_phoneNumberOfEmployeeById_returnEmployee() {
+        Integer id = 20;
+        Long phoneNumber = 12345678L;
+        Employee employee = new Employee();
+        employee.setId(id);
+
+        when(repository.findById(id)).thenReturn(Optional.of(employee));
+        employee.setPhoneNumber(phoneNumber);
+
+        repository.save(employee);
+
+        Employee expected = service.updatePhoneById(id, phoneNumber);
+
+        assertEquals(phoneNumber, expected.getPhoneNumber());
+        assertThat(expected).isSameAs(employee);
+        verify(repository).findById(id);
     }
 }
