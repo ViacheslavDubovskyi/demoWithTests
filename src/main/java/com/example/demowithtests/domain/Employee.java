@@ -27,6 +27,9 @@ public class Employee {
     private String country;
     private String email;
 
+    private String username;
+    private String password;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     private Set<Address> addresses = new HashSet<>();

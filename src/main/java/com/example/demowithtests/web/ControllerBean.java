@@ -1,10 +1,12 @@
 package com.example.demowithtests.web;
 
 import com.example.demowithtests.domain.Employee;
+import com.example.demowithtests.service.EmployeeDetailsService;
 import com.example.demowithtests.service.Service;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 public class ControllerBean {
 
     private final Service service;
+    private final EmployeeDetailsService employeeDetailsService;
 
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.OK)
@@ -74,5 +77,10 @@ public class ControllerBean {
     @ResponseStatus(HttpStatus.OK)
     public List<Employee> getUsersByCountry(@RequestParam(value = "country") String country) {
         return service.findEmployeesByCountry(country);
+    }
+
+    @GetMapping(value = "/users", params = {"username"})
+    public UserDetails loadUserByUsername (String username){
+        return employeeDetailsService.loadUserByUsername(username);
     }
 }

@@ -21,6 +21,10 @@ spring:
     # clean-disabled: true
     baseline-on-migrate: true
 # Server configuration
+#  security:
+#      user:
+#        name: user
+#        password: password
 server:
   port: 8087 #set your port
 # Swagger configuration

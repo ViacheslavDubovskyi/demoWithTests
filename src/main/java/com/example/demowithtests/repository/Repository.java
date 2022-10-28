@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 @org.springframework.stereotype.Repository
 public interface Repository extends JpaRepository<Employee, Integer> {
@@ -49,4 +50,6 @@ public interface Repository extends JpaRepository<Employee, Integer> {
      */
     @Query("Select user from Employee user where user.country = ?1 AND user.isDeleted = false")
     List<Employee> findEmployeesByCountry(String country);
+
+    Optional<Employee> findByUsername(String username);
 }
