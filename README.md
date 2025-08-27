@@ -42,6 +42,7 @@ This layered architecture improves maintainability, testability, and scalability
 + MapStruct (DTO ↔ Entity mapping)
 + JUnit 5 & Mockito (testing)
 + Maven
++ Swagger
 
 ⚙️ **Build & Run**
 
