@@ -1,6 +1,6 @@
 👩‍💼 **HR Employee Management App**
 
-A RESTful Spring Boot application with a layered architecture that supports small HR teams with CRUD operations, simplifying employee data management.
+A RESTful Spring Boot application with a layered architecture that supports small HR teams by providing CRUD operations to simplify employee data management.
 
 📌 **Features**
 
