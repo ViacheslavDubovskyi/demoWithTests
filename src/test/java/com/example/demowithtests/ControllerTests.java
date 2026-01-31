@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -32,7 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(ControllerBean.class)
-@AutoConfigureMockMvc(addFilters = false)
 public class ControllerTests {
 
     @Autowired
@@ -51,6 +51,7 @@ public class ControllerTests {
     private EmployeeDetailsService employeeDetailsService;
 
     @Test
+    @WithMockUser(username = "admin", roles = "ADMIN")
     public void createEmployee_success() throws Exception {
         Employee employee = Employee.builder()
                 .name("John")
@@ -70,6 +71,7 @@ public class ControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = "USER")
     public void getEmployeeById_success() throws Exception {
 
         Employee employee = Employee.builder()
@@ -89,6 +91,7 @@ public class ControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = "USER")
     public void getAllEmployees_success() throws Exception {
 
         Employee employee = Employee.builder()
